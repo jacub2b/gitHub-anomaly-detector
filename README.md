@@ -5,7 +5,7 @@
 * An os with docker installed on it, if you are using windows, make sure docker desktop is running.
 
 ## How to run
-- Download the [github_anomaly_detector.tar](https://drive.google.com/file/d/1W8Jh_fj6j1RdDusOp5oyADsvh1MR8QnT/view?usp=sharing)
+- Download the [github_anomaly_detector.tar](https://drive.google.com/file/d/1W8Jh_fj6j1RdDusOp5oyADsvh1MR8QnT/view?usp=sharing) file.
 - Run docker load -i github_anomaly_detector.tar from the downloaded file path.
 - Run the command docker images and validate the github_anomaly_detector image appears in the list.
 - Start the server by running docker run -p 8080:8080 github_anomaly_detector.
