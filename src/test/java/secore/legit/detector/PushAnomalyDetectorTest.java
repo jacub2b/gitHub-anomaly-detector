@@ -8,7 +8,6 @@ import secure.legit.data.PushGitHubEvent;
 import secure.legit.data.RepositoryData;
 import secure.legit.detector.PushAnomalyDetector;
 
-import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 

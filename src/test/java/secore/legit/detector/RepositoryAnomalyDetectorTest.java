@@ -8,6 +8,7 @@ import secure.legit.data.RepositoryData;
 import secure.legit.data.RepositoryGitHubEvent;
 import secure.legit.detector.RepositoryAnomalyDetector;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
@@ -37,9 +38,17 @@ public class RepositoryAnomalyDetectorTest {
     }
 
     @Test
+    public void detectAnomaly_shouldDetectWhenDeletedWithinTime_differentTimeZone() {
+        ZoneId differentZone = ZoneId.of("America/New_York");
+        ZonedDateTime fourMinutesAgoNewYork = ZonedDateTime.now(differentZone).minusMinutes(4);
+        Optional<AnomalyInfo> anomalyInfo = anomalyDetector.detectAnomaly(buildEvent(Action.DELETION.value, fourMinutesAgoNewYork.toString()));
+        assertTrue(anomalyInfo.isPresent());
+    }
+
+    @Test
     public void detectAnomaly_shouldNotDetectWhenCreatedWithinTime() {
-        String fiveMinutesAgo = ZonedDateTime.now().minusMinutes(4).toString();
-        Optional<AnomalyInfo> anomalyInfo = anomalyDetector.detectAnomaly(buildEvent(Action.CREATION.value, fiveMinutesAgo));
+        String fourMinutesAgo = ZonedDateTime.now().minusMinutes(4).toString();
+        Optional<AnomalyInfo> anomalyInfo = anomalyDetector.detectAnomaly(buildEvent(Action.CREATION.value, fourMinutesAgo));
         assertFalse(anomalyInfo.isPresent());
     }
 

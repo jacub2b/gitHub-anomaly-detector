@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 public class TeamAnomalyDetector implements AnomalyDetector<TeamGitHubEvent> {
-    private static String PROHIBITED_PREFIX = "hacker";
+    private static final String PROHIBITED_PREFIX = "hacker";
 
     @Override
     public Optional<AnomalyInfo> detectAnomaly(TeamGitHubEvent eventData) {
