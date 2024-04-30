@@ -1,5 +1,7 @@
 package secure.legit.detector;
 
+import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import secure.legit.data.AnomalyInfo;
 import secure.legit.data.PushGitHubEvent;
@@ -11,13 +13,20 @@ import java.util.Collections;
 import java.util.Optional;
 
 @Service
-public class PushAnomalyDetector implements AnomalyDetector<PushGitHubEvent>{
+public class PushAnomalyDetector implements AnomalyDetector{
     private static final int PUSH_BOUNDARY_FLOOR = 14;
     private static final int PUSH_BOUNDARY_CEILING = 16;
+    private Gson gson;
+//    todo handle github mapping errors
 
+    @Autowired
+    public PushAnomalyDetector(Gson gson) {
+        this.gson = gson;
+    }
 
     @Override
-    public Optional<AnomalyInfo> detectAnomaly(PushGitHubEvent eventData) {
+    public Optional<AnomalyInfo> detectAnomaly(String eventPayload) {
+        PushGitHubEvent eventData = gson.fromJson(eventPayload, PushGitHubEvent.class);
         ZonedDateTime dateTime = ZonedDateTime.parse(eventData.getHead_commit().getTimestamp());
         ZoneId userZoneId = dateTime.getZone();
         String pushedEpochSeconds = eventData.getRepository().getPushed_at();

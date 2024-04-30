@@ -1,5 +1,7 @@
 package secure.legit.detector;
 
+import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import secure.legit.data.Action;
 import secure.legit.data.AnomalyInfo;
@@ -9,11 +11,19 @@ import java.util.Collections;
 import java.util.Optional;
 
 @Service
-public class TeamAnomalyDetector implements AnomalyDetector<TeamGitHubEvent> {
+public class TeamAnomalyDetector implements AnomalyDetector {
     private static final String PROHIBITED_PREFIX = "hacker";
 
+    private Gson gson;
+
+    @Autowired
+    public TeamAnomalyDetector(Gson gson) {
+        this.gson = gson;
+    }
+
     @Override
-    public Optional<AnomalyInfo> detectAnomaly(TeamGitHubEvent eventData) {
+    public Optional<AnomalyInfo> detectAnomaly(String eventPayload) {
+        TeamGitHubEvent eventData = gson.fromJson(eventPayload, TeamGitHubEvent.class);
         if(eventData.getAction().equals(Action.CREATION.value) && isProhibitedPrefixInName(eventData)) {
             AnomalyInfo anomalyInfo = new AnomalyInfo(anomalyDescription(), Collections.singletonList(eventData));
 

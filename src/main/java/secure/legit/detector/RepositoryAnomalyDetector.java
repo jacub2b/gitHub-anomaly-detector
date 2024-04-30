@@ -1,8 +1,12 @@
 package secure.legit.detector;
 
+import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.stereotype.Service;
 import secure.legit.data.Action;
 import secure.legit.data.AnomalyInfo;
+import secure.legit.data.RepositoryData;
 import secure.legit.data.RepositoryGitHubEvent;
 
 import java.time.ZonedDateTime;
@@ -11,13 +15,20 @@ import java.util.Collections;
 import java.util.Optional;
 
 @Service
-public class RepositoryAnomalyDetector implements AnomalyDetector<RepositoryGitHubEvent> {
+public class RepositoryAnomalyDetector implements AnomalyDetector {
+    private final int MINIMAL_DELETION_MINUTES = 5;
+
+    private final Gson gson;
 
 
-    private static final int MINIMAL_DELETION_MINUTES = 5;
+    @Autowired
+    public RepositoryAnomalyDetector(Gson gson) {
+        this.gson = gson;
+    }
 
     @Override
-    public Optional<AnomalyInfo> detectAnomaly(RepositoryGitHubEvent eventData) {
+    public Optional<AnomalyInfo> detectAnomaly(String eventPayload) {
+        RepositoryGitHubEvent eventData = gson.fromJson(eventPayload, RepositoryGitHubEvent.class);
         String creationTime = eventData.getRepository().getCreated_at();
         ZonedDateTime zonedDateTime = ZonedDateTime.parse(creationTime);
         ZonedDateTime currentTime = ZonedDateTime.now();

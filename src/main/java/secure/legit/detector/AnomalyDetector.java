@@ -5,7 +5,7 @@ import secure.legit.data.GitHubEvent;
 
 import java.util.Optional;
 
-public interface AnomalyDetector <T extends GitHubEvent> {
-    public Optional<AnomalyInfo> detectAnomaly(T eventData);
+public interface AnomalyDetector {
+    public Optional<AnomalyInfo> detectAnomaly(String eventData);
     public String anomalyDescription();
 }
