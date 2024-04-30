@@ -1,4 +1,4 @@
-package secore.legit.detector;
+package secure.legit.detector;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -6,7 +6,6 @@ import secure.legit.data.Action;
 import secure.legit.data.AnomalyInfo;
 import secure.legit.data.RepositoryData;
 import secure.legit.data.RepositoryGitHubEvent;
-import secure.legit.detector.RepositoryAnomalyDetector;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;

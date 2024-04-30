@@ -1,9 +1,8 @@
-package secore.legit.detector;
+package secure.legit.detector;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import secure.legit.data.*;
-import secure.legit.detector.TeamAnomalyDetector;
 
 import java.util.Optional;
 
