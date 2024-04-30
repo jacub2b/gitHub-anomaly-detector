@@ -21,7 +21,7 @@
 ## endpoints
 - */events/pushEvent* 
 - */events/repositoryEvent*
-- */events/pushEvent*
+- */events/teamEvent*
 
 Enjoy!
 
