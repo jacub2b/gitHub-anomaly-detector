@@ -25,7 +25,7 @@ from the downloaded file path.
 ## endpoints
 - */events/pushEvent* 
 - */events/repositoryEvent*
-- */events/pushEvent*
+- */events/teamEvent*
 
 Enjoy!
 
