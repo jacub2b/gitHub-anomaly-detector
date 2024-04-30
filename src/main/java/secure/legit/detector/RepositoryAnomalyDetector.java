@@ -46,4 +46,10 @@ public class RepositoryAnomalyDetector implements AnomalyDetector {
     public String anomalyDescription() {
         return "A repository has been deleted less than " + MINIMAL_DELETION_MINUTES + " minutes after being created!";
     }
+
+    @Override
+    public String eventName() {
+        return "repository";
+//        todo
+    }
 }

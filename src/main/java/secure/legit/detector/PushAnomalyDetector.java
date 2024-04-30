@@ -49,4 +49,10 @@ public class PushAnomalyDetector implements AnomalyDetector{
     public String anomalyDescription() {
         return "pushes have been done in uncommon hours!";
     }
+
+    @Override
+    public String eventName() {
+        return "push";
+//        todo
+    }
 }

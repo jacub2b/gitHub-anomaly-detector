@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface AnomalyDetector {
     public Optional<AnomalyInfo> detectAnomaly(String eventData);
     public String anomalyDescription();
+    public String eventName();
 }

@@ -38,6 +38,12 @@ public class TeamAnomalyDetector implements AnomalyDetector {
         return "suspicious team has been created with " + PROHIBITED_PREFIX + " prefix!";
     }
 
+    @Override
+    public String eventName() {
+        return "team";
+//        todo
+    }
+
     private boolean isProhibitedPrefixInName(TeamGitHubEvent eventData) {
         String newTeamName = eventData.getTeam().getName();
 
